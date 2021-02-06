@@ -5,6 +5,7 @@ import * as path from 'path';
 const CONFIG_NAME = 'vscodemacros';
 const CFG_MACRO_MODULE_PATH = 'macroFilePath';
 const CFG_RUN_MACRO_AFTER_FILE_SELECTION = 'runMacroAfterMacroFileSelection';
+const vscodeInstallPath = process.env.VSCODE_CWD + '/';
 
 export function activate(context: vscode.ExtensionContext) {
   // SelectMacroFileCommand
@@ -103,7 +104,7 @@ function getConfiguration(): vscode.WorkspaceConfiguration {
  */
 async function getMacroModulePathConf() {
   const cfg = getConfiguration();
-  const macroModPath = cfg.get<string>(CFG_MACRO_MODULE_PATH);
+  const macroModPath = vscodeInstallPath + cfg.get<string>(CFG_MACRO_MODULE_PATH);
   if (!macroModPath) {
     // Path not set in the configuration
     await vscode.window.showErrorMessage('The macro file is not set in the configuration.');
